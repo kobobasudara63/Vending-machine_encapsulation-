@@ -1,0 +1,65 @@
+#before encapsulation 
+class VendingMachine:
+
+    def __init__(self):
+        self.money = 0
+        self.product = "Chocolate"
+        self.price = 2
+
+
+# Create vending machine
+machine = VendingMachine()
+
+# Add money
+machine.money = 5
+
+print("Money:", machine.money)
+
+# Buy product
+if machine.money >= machine.price:
+    machine.money = machine.money - machine.price
+    print("You bought", machine.product)
+
+print("Money left:", machine.money)
+
+# Problem: anyone can change the price directly
+machine.price = 0
+
+print("New price:", machine.price)
+
+
+#After encapsulation 
+class VendingMachine:
+
+    def __init__(self):
+        self.__money = 0
+        self.__product = "Chocolate"
+        self.__price = 2
+
+    # Add money
+    def insert_money(self, amount):
+        if amount > 0:
+            self.__money = self.__money + amount
+            print("Money inserted!")
+
+    # Buy product
+    def buy_product(self):
+        if self.__money >= self.__price:
+            self.__money = self.__money - self.__price
+            print("You bought", self.__product)
+        else:
+            print("Not enough money.")
+
+    # Check money
+    def check_money(self):
+        print("Money left:", self.__money)
+
+
+# Create vending machine
+machine = VendingMachine()
+
+# Use public methods
+machine.insert_money(5)
+machine.check_money()
+machine.buy_product()
+machine.check_money()
